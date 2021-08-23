@@ -40,8 +40,27 @@ namespace ATM
                             int enteredPIN = Convert.ToInt32(Console.ReadLine());
                             if (enteredPIN == accountPIN)
                             {
+                                Console.Clear();
                                 //TODO 3. Create MainMenu for ATM
-                                Console.WriteLine("Please Select one of the following options: ");
+                                bool mainMenu = true;
+                                do
+                                {
+                                    Console.WriteLine("Please Select one of the following options: ");
+                                    Console.WriteLine("\n(1)Check Account Balance" +
+                                        "\n(2) Make Deposit" + 
+                                        "\n(3) Make Withdrawl" +
+                                        "\n(4) Make Transfer" +
+                                        "\n(5) Exit");
+
+                                    ConsoleKey userChoice = Console.ReadKey(true).Key;
+                                    Console.Clear();
+
+                                    //TODO 4. Create Switch statement for users choice
+                                    #region userChoice Switch Statement
+
+                                    #endregion
+                                } while (mainMenu);
+                                
                                
                             }
                             else
@@ -61,7 +80,7 @@ namespace ATM
                        
                         #endregion
 
-                    }
+                    }//end Account Number IF statement
                     else
                     {
                         Console.WriteLine("Account number entered is incorrect. Please try again.");
@@ -71,7 +90,7 @@ namespace ATM
                             Console.WriteLine("Too many failed attempts. Your account has been locked.");
                             repeat = false;
                         }
-                    }
+                    }//end account number else statement
                     
                 } while (accountNumberAttempt < 3);
                 #endregion
