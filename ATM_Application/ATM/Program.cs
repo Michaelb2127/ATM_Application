@@ -23,6 +23,7 @@ namespace ATM
                 //TODO 1. Add do-while loop & If-statement for Acc. Number attempt   
                 #region Account Number Login
                 int accountNumberAttempt = 0;
+                bool accountNum = true;
                 do
                 {
                     Console.WriteLine("Please enter your 9 digit account number");
@@ -33,7 +34,7 @@ namespace ATM
                         #region PIN Number Login
                        
                         int pinNumberAttempt = 0;
-                       
+                        bool pin = true;
                         do
                         {
                             Console.WriteLine("Please enter your 4 digit PIN");
@@ -57,12 +58,39 @@ namespace ATM
 
                                     //TODO 4. Create Switch statement for users choice
                                     #region userChoice Switch Statement
-
+                                    switch (userChoice)
+                                    {
+                                        //two cases for each in case user enters number keys or number pad (Possibly not needed for real world ATM)
+                                        case ConsoleKey.D1:
+                                        case ConsoleKey.NumPad1:
+                                            Console.WriteLine("Account Balances");
+                                            break;
+                                        case ConsoleKey.D2:
+                                        case ConsoleKey.NumPad2:
+                                            Console.WriteLine("Make Deposit");
+                                            break;
+                                        case ConsoleKey.D3:
+                                        case ConsoleKey.NumPad3:
+                                            Console.WriteLine("Make Withdrawl");
+                                            break;
+                                        case ConsoleKey.D4:
+                                        case ConsoleKey.NumPad4:
+                                            Console.WriteLine("Make Transfer");
+                                            break;
+                                        case ConsoleKey.D5:
+                                        case ConsoleKey.NumPad5:
+                                            Console.WriteLine("Thank you for using this ATM");
+                                            mainMenu = false;
+                                            repeat = false;
+                                            break;
+                                        default: Console.WriteLine("Please choose one of the given options");
+                                            break;
+                                    }
                                     #endregion
                                 } while (mainMenu);
-                                
-                               
-                            }
+
+                                pin = false;
+                            }//End PIN if statement
                             else
                             {
                                 Console.WriteLine("Pin number entered is incorrect. Please try again.");
@@ -74,12 +102,12 @@ namespace ATM
                                     repeat = false;
                                    
                                 }
-                            }
+                            }//end PIN else statement
                             
-                        } while (pinNumberAttempt < 3 );
-                       
-                        #endregion
+                        } while (pinNumberAttempt < 3 && pin);
 
+                        #endregion
+                        accountNum = false;
                     }//end Account Number IF statement
                     else
                     {
@@ -92,7 +120,7 @@ namespace ATM
                         }
                     }//end account number else statement
                     
-                } while (accountNumberAttempt < 3);
+                } while (accountNumberAttempt < 3 && accountNum);
                 #endregion
             } while (repeat);//end Do-While (entire application)
         }//end Main()
