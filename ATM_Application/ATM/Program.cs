@@ -105,10 +105,55 @@ namespace ATM
                                         case ConsoleKey.D2:
                                         case ConsoleKey.NumPad2:
                                             Console.WriteLine("Make Deposit");
-                                            //TODO 8. Create Do-While loop for accounts 
-                                            //TODO 9. Ask user what account they would like to deposit into & how much (Checking or Savings)
-                                            //TODO 10. Read user's input and Create Switch statement for user's choice (Checking or savings)
-                                            //TODO 11. Show confirmation or error message
+                                            #region Make Deposit
+                                            //TODO 8. Create Do-While loop for accounts
+                                            bool deposit = true;
+                                            do
+                                            {
+                                                //TODO 9. Ask user what account they would like to deposit into & how much (Checking or Savings)
+                                                Console.WriteLine("Which account would you like to make a deposit?");
+                                                Console.WriteLine("(1) Checking" +
+                                                    "\n(2) Savings" +
+                                                    "\n(3) Go Back");
+                                                //TODO 10. Read user's input and Create Switch statement for user's choice (Checking or savings)
+                                                ConsoleKey accountChoice = Console.ReadKey(true).Key;
+                                                Console.Clear();
+                                                switch (accountChoice)
+                                                {
+                                                    case ConsoleKey.D1:
+                                                    case ConsoleKey.NumPad1:
+                                                        #region Checking Deposit
+                                                        Console.WriteLine("Please enter the amount you would like to deposit into your Checking account: ");
+                                                        string requestedCheckingDeposit = Console.ReadLine();
+                                                        decimal amountToDepositChecking = Convert.ToDecimal(requestedCheckingDeposit);
+                                                        checkingBalance += amountToDepositChecking;
+                                                        //TODO 11. Show confirmation or error message
+                                                        //NOTE: In future, handle error if user types in letter characters instead of number digits 
+                                                        Console.Clear();
+                                                        Console.WriteLine("{0:c} has been deposited into your checking account", amountToDepositChecking);
+                                                        //String Formatting used vs String Interpolation, only to demonstrate knowledge of both
+                                                        deposit = false;
+                                                        #endregion
+                                                        break;
+                                                    case ConsoleKey.D2:
+                                                    case ConsoleKey.NumPad2:
+                                                        #region Savings Deposit
+                                                        Console.WriteLine("Please enter the amount you would like to deposit into your Savings account: ");
+                                                        string requestedDepositSavings = Console.ReadLine();
+                                                        decimal amountToDepositSavings = Convert.ToDecimal(requestedDepositSavings);
+                                                        savingsBalance += amountToDepositSavings;
+                                                        Console.Clear();
+                                                        Console.WriteLine($"{amountToDepositSavings:c} has been deposited into your savings account");
+                                                        deposit = false;
+                                                        #endregion
+                                                        break;
+                                                    default:
+                                                        Console.WriteLine("Please choose a valid option");
+                                                        break;
+                                                }//end Deposit Choice
+                                                
+                                            } while (deposit);
+                                            #endregion
                                             break;
                                         case ConsoleKey.D3:
                                         case ConsoleKey.NumPad3:
