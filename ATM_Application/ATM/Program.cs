@@ -47,7 +47,7 @@ namespace ATM
                                 do
                                 {
                                     Console.WriteLine("Please Select one of the following options: ");
-                                    Console.WriteLine("\n(1)Check Account Balance" +
+                                    Console.WriteLine("\n(1) Check Account Balance" +
                                         "\n(2) Make Deposit" + 
                                         "\n(3) Make Withdrawl" +
                                         "\n(4) Make Transfer" +
@@ -64,18 +64,67 @@ namespace ATM
                                         case ConsoleKey.D1:
                                         case ConsoleKey.NumPad1:
                                             Console.WriteLine("Account Balances");
+                                            #region Account Balances
+                                            //TODO 5. Create Do-While loop for accounts
+                                            bool account = true;
+                                            do
+                                            {
+                                                //TODO 6. Ask user what account they would like to check balance (Checking or Savings)
+                                                Console.WriteLine("\nWhich account would you like to check?");
+                                                Console.WriteLine("(1) Checking" +
+                                                    "\n(2) Savings" +
+                                                    "\n(3) Go Back");
+                                                //TODO 7. Read user's input and Create Switch statement for user's choice (Checking or savings)
+                                                ConsoleKey accountChoice = Console.ReadKey(true).Key;
+                                                Console.Clear();
+                                                switch (accountChoice)
+                                                {
+                                                    case ConsoleKey.D1:
+                                                    case ConsoleKey.NumPad1:
+                                                        Console.WriteLine($"Your checking account has a balance of: {checkingBalance:c}");
+                                                        account = false;
+                                                        break;
+                                                    case ConsoleKey.D2:
+                                                    case ConsoleKey.NumPad2:
+                                                        Console.WriteLine($"Your savings account has a balance of {savingsBalance:c}");
+                                                        account = false;
+                                                        break;
+                                                    case ConsoleKey.D3:
+                                                    case ConsoleKey.NumPad3:
+                                                        account = false;
+                                                        break;
+                                                    default:
+                                                        Console.WriteLine("Please choose a valid option");
+                                                        break;
+                                                }
+                                            } while (account);
+                                            
+                                            #endregion
                                             break;
+                                        
                                         case ConsoleKey.D2:
                                         case ConsoleKey.NumPad2:
                                             Console.WriteLine("Make Deposit");
+                                            //TODO 8. Create Do-While loop for accounts 
+                                            //TODO 9. Ask user what account they would like to deposit into & how much (Checking or Savings)
+                                            //TODO 10. Read user's input and Create Switch statement for user's choice (Checking or savings)
+                                            //TODO 11. Show confirmation or error message
                                             break;
                                         case ConsoleKey.D3:
                                         case ConsoleKey.NumPad3:
                                             Console.WriteLine("Make Withdrawl");
+                                            //TODO 12. Create Do-While loop for accounts 
+                                            //TODO 13. Ask user what account they would like to withdrawl from & how much (Checking or Savings)
+                                            //TODO 14.bRead user's input and Create Switch statement for user's choice (Checking or savings)
+                                            //TODO 15. Show confirmation or error message
                                             break;
                                         case ConsoleKey.D4:
                                         case ConsoleKey.NumPad4:
                                             Console.WriteLine("Make Transfer");
+                                            //TODO 16. Create Do-While loop for accounts 
+                                            //TODO 17. Ask user what account they would like to transfer to and from & how much (Checking to Savings or Savings to Checking)
+                                            //TODO 18. Read user's input and Create Switch statement for user's choice (Checking or savings)
+                                            //TODO 19. Show confirmation or error message
                                             break;
                                         case ConsoleKey.D5:
                                         case ConsoleKey.NumPad5:
