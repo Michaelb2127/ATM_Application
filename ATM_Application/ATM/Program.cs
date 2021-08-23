@@ -158,10 +158,70 @@ namespace ATM
                                         case ConsoleKey.D3:
                                         case ConsoleKey.NumPad3:
                                             Console.WriteLine("Make Withdrawl");
-                                            //TODO 12. Create Do-While loop for accounts 
-                                            //TODO 13. Ask user what account they would like to withdrawl from & how much (Checking or Savings)
-                                            //TODO 14.bRead user's input and Create Switch statement for user's choice (Checking or savings)
-                                            //TODO 15. Show confirmation or error message
+                                            #region Make Withdrawl
+                                            //TODO 12. Create Do-While loop for accounts
+                                            bool withdrawl = true;
+                                            do
+                                            {
+                                                //TODO 13. Ask user what account they would like to withdrawl from & how much (Checking or Savings)
+                                                Console.WriteLine("Which account would you like to withdrawl from?");
+                                                Console.WriteLine("(1) Checking" +
+                                                    "\n(2) Savings" +
+                                                    "\n(3) Go Back");                                              
+                                                //TODO 14.Read user's input and Create Switch statement for user's choice (Checking or savings)
+                                                ConsoleKey accountChoice = Console.ReadKey(true).Key;
+                                                Console.Clear();
+                                                switch (accountChoice)
+                                                {
+                                                    case ConsoleKey.D1:
+                                                    case ConsoleKey.NumPad1:
+                                                        #region Checking Withdrawl
+                                                        Console.WriteLine("How much would you like to withdrawl from your checking account? ");
+                                                        string requestedWithdrawlChecking = Console.ReadLine();
+                                                        decimal amountToWithdrawlChecking = Convert.ToDecimal(requestedWithdrawlChecking);
+                                                        Console.Clear();
+                                                        //TODO 15. Show confirmation or error message
+                                                        if (amountToWithdrawlChecking <= checkingBalance)
+                                                        {
+                                                            checkingBalance -= amountToWithdrawlChecking;
+                                                            
+                                                            Console.WriteLine($"{amountToWithdrawlChecking:c} has been successfully withdrawn from your checking account");
+                                                            withdrawl = false;
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine($"Error. Your withdrawl of {amountToWithdrawlChecking:c} could not be completed due to insuffienct funds in your checking account");
+                                                            withdrawl = false;
+                                                        }
+                                                        #endregion
+                                                        break;
+                                                    case ConsoleKey.D2:
+                                                    case ConsoleKey.NumPad2:
+                                                        #region Savings Withdrawl
+                                                        Console.WriteLine("How much would you like to withdrawl from your savings account? ");
+                                                        string requestedWithdrawlSavings = Console.ReadLine();
+                                                        decimal amountToWithdrawlSavings = Convert.ToDecimal(requestedWithdrawlSavings);
+                                                        Console.Clear();
+                                                        if (amountToWithdrawlSavings <= savingsBalance)
+                                                        {
+                                                            savingsBalance -= amountToWithdrawlSavings;
+                                                            Console.WriteLine($"{amountToWithdrawlSavings:c} has been successfully withdrawn from your savings account.");
+                                                            withdrawl = false;
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine($"Error. Your withdrawl of {amountToWithdrawlSavings:c} could not be completed due to insuffient funds in your savings account.");
+                                                            withdrawl = false;
+                                                        }
+                                                        #endregion
+                                                        break;
+                                                    default:
+                                                        Console.WriteLine("Please choose one of the given options");
+                                                        break; 
+                                                }
+                                                
+                                            } while (withdrawl);                                            
+                                            #endregion
                                             break;
                                         case ConsoleKey.D4:
                                         case ConsoleKey.NumPad4:
