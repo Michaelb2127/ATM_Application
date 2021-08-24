@@ -32,11 +32,12 @@ namespace ATM
                     {
                         //TODO 2. add do-while loop & If-statment for PIN Number attempt
                         #region PIN Number Login
-                       
+                        Console.Clear();
                         int pinNumberAttempt = 0;
                         bool pin = true;
                         do
                         {
+                            
                             Console.WriteLine("Please enter your 4 digit PIN");
                             int enteredPIN = Convert.ToInt32(Console.ReadLine());
                             if (enteredPIN == accountPIN)
@@ -47,7 +48,7 @@ namespace ATM
                                 do
                                 {
                                     Console.WriteLine("Please Select one of the following options: ");
-                                    Console.WriteLine("\n(1) Check Account Balance" +
+                                    Console.WriteLine("(1) Check Account Balance" +
                                         "\n(2) Make Deposit" + 
                                         "\n(3) Make Withdrawl" +
                                         "\n(4) Make Transfer" +
@@ -147,6 +148,10 @@ namespace ATM
                                                         deposit = false;
                                                         #endregion
                                                         break;
+                                                    case ConsoleKey.D3:
+                                                    case ConsoleKey.NumPad3:
+                                                        deposit = false;
+                                                        break;
                                                     default:
                                                         Console.WriteLine("Please choose a valid option");
                                                         break;
@@ -215,6 +220,10 @@ namespace ATM
                                                         }
                                                         #endregion
                                                         break;
+                                                    case ConsoleKey.D3:
+                                                    case ConsoleKey.NumPad3:
+                                                        withdrawl = false;
+                                                        break;
                                                     default:
                                                         Console.WriteLine("Please choose one of the given options");
                                                         break; 
@@ -225,11 +234,80 @@ namespace ATM
                                             break;
                                         case ConsoleKey.D4:
                                         case ConsoleKey.NumPad4:
+                                            #region Make Transfer
                                             Console.WriteLine("Make Transfer");
                                             //TODO 16. Create Do-While loop for accounts 
-                                            //TODO 17. Ask user what account they would like to transfer to and from & how much (Checking to Savings or Savings to Checking)
-                                            //TODO 18. Read user's input and Create Switch statement for user's choice (Checking or savings)
-                                            //TODO 19. Show confirmation or error message
+                                            bool transfer = true;
+                                            do
+                                            {
+                                                //TODO 17. Ask user what account they would like to transfer to and from & how much (Checking to Savings or Savings to Checking)
+                                                Console.WriteLine("Which account would you like to transfer from?");
+                                                Console.WriteLine("(1) Checking to Savings" +
+                                                    "\n(2) Savings to Checking" +
+                                                    "\n(3) Go back");
+                                                //TODO 18. Read user's input and Create Switch statement for user's choice (Checking or savings)
+                                                ConsoleKey transferChoice = Console.ReadKey(true).Key;
+                                                Console.Clear();
+                                                switch (transferChoice)
+                                                {
+                                                    case ConsoleKey.D1:
+                                                    case ConsoleKey.NumPad1:
+                                                        #region Checking to Savings
+                                                        Console.WriteLine("How much would you like to transfer from your checking account? ");
+                                                        string requestedTransferToSavings = Console.ReadLine();
+                                                        decimal transferToSavings = Convert.ToDecimal(requestedTransferToSavings);
+                                                        if (transferToSavings <= checkingBalance)
+                                                        {
+                                                            Console.Clear();
+                                                            checkingBalance -= transferToSavings;
+                                                            savingsBalance += transferToSavings;
+                                                            Console.WriteLine($"{transferToSavings:c} has been successfully transferred to your savings account from your checking account");
+                                                            transfer = false;
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.Clear();
+                                                            Console.WriteLine($"Error. Your transfer of {transferToSavings:c} could not be completed due to insuffienct funds in your checking account");
+                                                            transfer = false;
+                                                        }
+                                                        #endregion
+                                                        break;
+                                                    case ConsoleKey.D2:
+                                                    case ConsoleKey.NumPad2:
+                                                        #region Savings to Checking
+                                                        Console.WriteLine("How much would you like to transfer from your savings account?");
+                                                        string requestedTransferToChecking = Console.ReadLine();
+                                                        decimal transferToChecking = Convert.ToDecimal(requestedTransferToChecking);
+                                                        //TODO 19. Show confirmation or error message
+                                                        if (transferToChecking <= savingsBalance)
+                                                        {
+                                                            Console.Clear();
+                                                            savingsBalance -= transferToChecking;
+                                                            checkingBalance += transferToChecking;
+                                                            Console.WriteLine($"{transferToChecking:c} has been seccessfully transferred to your checking account from your savings account.");
+                                                            transfer = false;   
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.Clear();
+                                                            Console.WriteLine($"Error. Your transfer of {transferToChecking:c} could not be completed due to insuffienct funds in your savings account.");
+                                                            transfer = false;
+                                                        }
+                                                        #endregion
+                                                        break;
+                                                    case ConsoleKey.D3:
+                                                    case ConsoleKey.NumPad3:
+                                                       transfer = false;
+                                                        break;
+                                                    default:
+                                                        Console.WriteLine("Please choose one of the given options");
+                                                        break;
+                                                }
+                                               
+                                            } while (transfer);
+                                            
+                                            #endregion
+
                                             break;
                                         case ConsoleKey.D5:
                                         case ConsoleKey.NumPad5:
@@ -247,10 +325,12 @@ namespace ATM
                             }//End PIN if statement
                             else
                             {
+                                Console.Clear();
                                 Console.WriteLine("Pin number entered is incorrect. Please try again.");
                                 pinNumberAttempt++;
                                 if (pinNumberAttempt >= 3)
                                 {
+                                    Console.Clear();
                                     Console.WriteLine("Too many failed attempts. Your account has been locked.");
                                     accountNumberAttempt = 4;
                                     repeat = false;
@@ -263,12 +343,14 @@ namespace ATM
                         #endregion
                         accountNum = false;
                     }//end Account Number IF statement
-                    else
+                    
                     {
+                        Console.Clear();
                         Console.WriteLine("Account number entered is incorrect. Please try again.");
                         accountNumberAttempt++;
                         if (accountNumberAttempt >= 3)
                         {
+                            Console.Clear();
                             Console.WriteLine("Too many failed attempts. Your account has been locked.");
                             repeat = false;
                         }
